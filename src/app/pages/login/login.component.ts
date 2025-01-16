@@ -13,12 +13,13 @@ import {Router} from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  public loginForm!: FormGroup;
+
   public titleTxt: string = "Entre na sua conta";
   public primaryBtnTxt: string = "Entrar";
   public questionTxt: string = "Já tem uma conta?";
   public registerTxtLink: string = "Cadastro";
-
-  public loginForm!: FormGroup;
+  public logoTxtLink: string = "moneycontrol";
 
   constructor(
     private router: Router,
