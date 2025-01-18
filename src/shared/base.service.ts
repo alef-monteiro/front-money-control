@@ -33,21 +33,22 @@ export class BaseService {
     }
 
 
-    public register(first_name: string, last_name: string, username: string, email: string, password: string) {
+    public register(first_name: string, last_name: string, email: string, password: string) {
         return this.httpClient.post(
             this.endPoints.endpoints.registerUser,
-            {first_name, last_name, username, email, password}
+            {first_name, last_name, email, password}
         )
     }
 
-    public login(username: string, password: string) {
+    public login(email: string, password: string) {
         return this.httpClient.post<LoginResponse>(
             this.endPoints.endpoints.loginUser,
-            {username, password},
+            {email, password},
             {withCredentials: true}
         ).pipe(
             tap((value) => {
                 console.log('Token recebido:', value.access);
+                console.log('Token recebido:', value.refresh);
 
                 // Armazene o token no sessionStorage
                 sessionStorage.setItem('auth-token', value.access);
@@ -67,7 +68,7 @@ export class BaseService {
         try {
             const payload = jwtDecode<any>(token);
 
-            if (!payload.id || !payload.first_name || !payload.last_name || !payload.username || !payload.email) {
+            if (!payload.id || !payload.first_name || !payload.last_name || !payload.email) {
                 console.error('Token JWT não contém as informações esperadas:', payload);
                 return null;
             }
@@ -86,7 +87,6 @@ export class BaseService {
                 full_name: payload.full_name,
                 first_name: payload.first_name,
                 last_name: payload.last_name,
-                username: payload.username,
                 email: payload.email,
                 active: true,
                 created_at: createdAt,

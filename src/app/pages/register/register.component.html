@@ -16,13 +16,6 @@
         <!--  Formulario-->
         <form [formGroup]="registerForm" class="space-y-4 md:space-y-6" action="#">
           <app-primary-input
-            formControlName="username"
-            type="text"
-            label="Nome de usuário"
-            placeholder="joaopedrosa23"
-          >
-          </app-primary-input>
-          <app-primary-input
             formControlName="email"
             type="email"
             label="E-mail"
@@ -34,14 +27,14 @@
             <app-primary-input
               formControlName="first_name"
               type="text"
-              label="Primeiro Nome"
+              label="Nome"
               placeholder="João">
             </app-primary-input>
 
             <app-primary-input
               formControlName="last_name"
               type="text"
-              label="Último Nome"
+              label="Sobrenome"
               placeholder="Silva">
             </app-primary-input>
           </div>
