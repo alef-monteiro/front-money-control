@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.baseService
         .register(
-          this.registerForm.value.username,
+          this.registerForm.controls['username'].value,
           this.registerForm.controls['first_name'].value,
           this.registerForm.controls['last_name'].value,
           this.registerForm.controls['email'].value,
