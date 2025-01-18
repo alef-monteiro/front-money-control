@@ -33,10 +33,10 @@ export class BaseService {
   }
 
 
-  public register(first_name: string, last_name: string, email: string, password: string) {
+  public register(username: string, first_name: string, last_name: string, email: string, password: string) {
     return this.httpClient.post(
       this.endPoints.endpoints.registerUser,
-      {first_name, last_name, email, password}
+      {username, first_name, last_name, email, password}
     )
   }
 
