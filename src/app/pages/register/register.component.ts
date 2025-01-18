@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
     private toastr: ToastrService,
   ) {
     this.registerForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.minLength(5)]],
       first_name: ['', [Validators.required, Validators.minLength(3)]],
       last_name: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.required, Validators.email]],
@@ -47,6 +48,7 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.baseService
         .register(
+          this.registerForm.controls['username'].value,
           this.registerForm.controls['first_name'].value,
           this.registerForm.controls['last_name'].value,
           this.registerForm.controls['email'].value,
