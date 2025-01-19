@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {tap} from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import {jwtDecode} from 'jwt-decode';
 import {EndpointsService} from './endpoints.service';
 import {User} from './models/user';
@@ -31,7 +31,6 @@ export class BaseService {
     }
     return headers;
   }
-
 
   public register(username: string, first_name: string, last_name: string, email: string, password: string) {
     return this.httpClient.post(
@@ -89,7 +88,6 @@ export class BaseService {
       return null;
     }
   }
-
 
   public updateProfile(id: number, data: User) {
     return this.httpClient.put(
@@ -156,6 +154,39 @@ export class BaseService {
   public getCategoriesById(id: number) {
     return this.httpClient.get(this.endPoints.endpoints.categoryById(id),
       {headers: this.headers, withCredentials: true})
+  }
+
+
+  // Método para obter o saldo total
+  public getTotalBalance(): Observable<any> {
+    return this.httpClient.get(
+      this.endPoints.endpoints.totalBalance,
+      {headers: this.headers, withCredentials: true}
+    );
+  }
+
+  // Método para obter o resumo mensal
+  public getMonthlySummary(): Observable<any> {
+    return this.httpClient.get(
+      this.endPoints.endpoints.monthlySummary,
+      {headers: this.headers, withCredentials: true}
+    );
+  }
+
+  // Método para obter as despesas do usuário
+  public getUserExpenses(): Observable<any> {
+    return this.httpClient.get(
+      this.endPoints.endpoints.userTotalExpenses,
+      {headers: this.headers, withCredentials: true}
+    );
+  }
+
+  // Método para obter o extrato de um cartão por ID
+  public getCardStatement(cardId: number): Observable<any> {
+    return this.httpClient.get(
+      this.endPoints.endpoints.cardStatementById(cardId),
+      {headers: this.headers, withCredentials: true}
+    );
   }
 
 }

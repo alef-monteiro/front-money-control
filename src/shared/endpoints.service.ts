@@ -26,6 +26,12 @@ export class EndpointsService {
     categoryData: URLS.BASE + URLS.CARDS + URLS.CARDS,
     categoryById: (id: number) => URLS.BASE + URLS.CARDS,
 
+    //Dashboard ações
+    dashboardData: URLS.BASE + URLS.DASHBOARD,
+    totalBalance: URLS.BASE + URLS.DASHBOARD + '/total_balance',
+    userTotalExpenses: URLS.BASE + URLS.DASHBOARD + '/user_expenses',
+    monthlySummary: URLS.BASE + URLS.DASHBOARD + '/monthly_summary',
+    cardStatementById: (id: number) => URLS.BASE + URLS.DASHBOARD + '/cardStatement' + id,
   };
 
   constructor() {

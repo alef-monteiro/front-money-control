@@ -7,4 +7,5 @@ export const URLS = {
   CARDS: 'cards/',
   EXPENSES: 'expenses/',
   CATEGORIES: 'categories/',
+  DASHBOARD: 'dashboard/',
 }
