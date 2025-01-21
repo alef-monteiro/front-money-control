@@ -4,6 +4,7 @@ import {Observable, tap} from 'rxjs';
 import {jwtDecode} from 'jwt-decode';
 import {EndpointsService} from './endpoints.service';
 import {User} from './models/user';
+import {Cards} from './models/cards';
 
 interface LoginResponse {
   access: string;
@@ -139,6 +140,14 @@ export class BaseService {
     )
   }
 
+  public postCardData(data: Cards) {
+    return this.httpClient.post(
+      this.endPoints.endpoints.cardsData,
+      data,
+      {headers: this.headers, withCredentials: true}
+    )
+  }
+
   public getCardDataById(id: number) {
     return this.httpClient.get(
       this.endPoints.endpoints.cardById(id),
@@ -157,7 +166,7 @@ export class BaseService {
   }
 
 
-  // Método para obter o saldo total
+  // Metodo para obter o saldo total
   public getTotalBalance(): Observable<any> {
     return this.httpClient.get(
       this.endPoints.endpoints.totalBalance,
@@ -165,7 +174,7 @@ export class BaseService {
     );
   }
 
-  // Método para obter o resumo mensal
+  // Metodo para obter o resumo mensal
   public getMonthlySummary(): Observable<any> {
     return this.httpClient.get(
       this.endPoints.endpoints.monthlySummary,
@@ -173,7 +182,7 @@ export class BaseService {
     );
   }
 
-  // Método para obter as despesas do usuário
+  // Metodo para obter as despesas do usuário
   public getUserExpenses(): Observable<any> {
     return this.httpClient.get(
       this.endPoints.endpoints.userTotalExpenses,
@@ -181,7 +190,7 @@ export class BaseService {
     );
   }
 
-  // Método para obter o extrato de um cartão por ID
+  // Metodo para obter o extrato de um cartão por ID
   public getCardStatement(cardId: number): Observable<any> {
     return this.httpClient.get(
       this.endPoints.endpoints.cardStatementById(cardId),
