@@ -1,0 +1,44 @@
+<app-default-home-layout>
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Bem-vindo ao Dashboard</h1>
+
+    <!-- Saldo Total -->
+    <div class="bg-blue-100 p-6 rounded-lg shadow-md mb-6">
+      <h2 class="text-xl font-semibold text-blue-800">Saldo Total</h2>
+      <p class="text-2xl font-bold text-blue-600 mt-2">
+        {{ realBalance | currency:'BRL' }}
+      </p>
+    </div>
+
+    <!-- Despesas -->
+    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Despesas</h2>
+      <div class="mb-4">
+        <p class="font-medium text-gray-700">
+          <span class="text-xl font-semibold text-red-500">{{ totalExpenses | currency:'BRL' }}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Resumo Mensal -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-xl font-semibold text-gray-800 mb-4">Resumo Mensal</h2>
+      <table class="table-auto w-full text-left border-collapse">
+        <thead>
+        <tr class="bg-gray-200 text-gray-800">
+          <th class="px-4 py-2">Mês</th>
+          <th class="px-4 py-2">Entradas</th>
+          <th class="px-4 py-2">Saídas</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let summary of monthlySummary" class="border-b hover:bg-gray-100">
+          <td class="px-4 py-2 text-gray-700">{{ summary.month | date:'MMMM yyyy' }}</td>
+          <td class="px-4 py-2 text-green-600 font-semibold">{{ summary.total_in | currency:'BRL' }}</td>
+          <td class="px-4 py-2 text-red-600 font-semibold">{{ summary.total_out | currency:'BRL' }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-default-home-layout>
