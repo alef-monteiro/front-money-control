@@ -28,10 +28,10 @@ export class EndpointsService {
 
     //Dashboard ações
     dashboardData: URLS.BASE + URLS.DASHBOARD,
-    totalBalance: URLS.BASE + URLS.DASHBOARD + '/total_balance',
-    userTotalExpenses: URLS.BASE + URLS.DASHBOARD + '/user_expenses',
-    monthlySummary: URLS.BASE + URLS.DASHBOARD + '/monthly_summary',
-    cardStatementById: (id: number) => URLS.BASE + URLS.DASHBOARD + '/cardStatement' + id,
+    totalBalance: URLS.BASE + URLS.DASHBOARD + 'total_balance/',
+    userTotalExpenses: URLS.BASE + URLS.DASHBOARD +   'user_expenses/',
+    monthlySummary: URLS.BASE + URLS.DASHBOARD + 'monthly_summary/',
+    cardStatementById: (id: number) => URLS.BASE + URLS.DASHBOARD + 'cardStatement/' + id,
   };
 
   constructor() {
