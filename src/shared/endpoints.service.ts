@@ -15,7 +15,7 @@ export class EndpointsService {
     userProfileById: (id: number) => URLS.BASE + URLS.USERS + id + '/',
 
     // Cartões
-    cardsData: URLS.BASE + URLS.CARDS + URLS.CARDS,
+    cardsData: URLS.BASE + URLS.CARDS,
     cardById: (id: number) => URLS.BASE + URLS.CARDS + id + '/',
 
     // Despesas
@@ -24,7 +24,7 @@ export class EndpointsService {
 
     //Categorias  de Despesa
     categoryData: URLS.BASE + URLS.CARDS + URLS.CARDS,
-    categoryById: (id: number) => URLS.BASE + URLS.CARDS,
+    categoryById: (id: number) => URLS.BASE + URLS.CARDS + id + '/',
 
     //Dashboard ações
     dashboardData: URLS.BASE + URLS.DASHBOARD,
