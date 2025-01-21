@@ -23,8 +23,8 @@ export class CardListComponent implements OnInit{
   public itemsPerPage: number = 5;  // Defina o número de itens por página
   public totalPages: number = 1;
 
-  constructor(private baseService: BaseService,
-              private toastr: ToastrService) {}
+  constructor(private readonly baseService: BaseService,
+              private readonly toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.loadCards();
@@ -43,7 +43,7 @@ export class CardListComponent implements OnInit{
     });
   }
 
-  // Método para obter os cartões da página atual
+  // Metodo para obter os cartões da página atual
   get paginatedCards(): Cards[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;

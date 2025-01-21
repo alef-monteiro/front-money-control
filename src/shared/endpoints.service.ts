@@ -13,6 +13,7 @@ export class EndpointsService {
     logoutUser: URLS.BASE + URLS.LOGOUT,
     userProfile: URLS.BASE + URLS.USERS,
     userProfileById: (id: number) => URLS.BASE + URLS.USERS + id + '/',
+    userUpdate: (id:number) => URLS.BASE + URLS.USERS + id + '/',
 
     // Cartões
     cardsData: URLS.BASE + URLS.CARDS,

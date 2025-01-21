@@ -17,8 +17,8 @@ interface LoginResponse {
 export class BaseService {
 
   constructor(
-    private httpClient: HttpClient,
-    private endPoints: EndpointsService,) {
+    private readonly httpClient: HttpClient,
+    private readonly endPoints: EndpointsService,) {
   }
 
   get headers(): HttpHeaders {
@@ -90,9 +90,9 @@ export class BaseService {
     }
   }
 
-  public updateProfile(id: number, data: User) {
+  public updateProfile(data: User) {
     return this.httpClient.put(
-      this.endPoints.endpoints.userProfileById(id),
+      this.endPoints.endpoints.userUpdate(data.id),
       data,
       {headers: this.headers, withCredentials: true}
     )

@@ -25,12 +25,12 @@ export class RegisterComponent implements OnInit {
   public logoTxtLink: string = 'MoneyControl';
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private baseService: BaseService,
-    private toastr: ToastrService,
+    private readonly formBuilderLogin: FormBuilder,
+    private readonly router: Router,
+    private readonly baseService: BaseService,
+    private readonly toastr: ToastrService,
   ) {
-    this.registerForm = this.formBuilder.group({
+    this.registerForm = this.formBuilderLogin.group({
       username: ['', [Validators.required, Validators.minLength(5)]],
       first_name: ['', [Validators.required, Validators.minLength(3)]],
       last_name: ['', [Validators.required, Validators.minLength(5)]],
