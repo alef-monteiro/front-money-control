@@ -14,27 +14,33 @@ import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.scss'
 })
-export class CardListComponent implements OnInit{
-  public cardsList: Cards[] = [];
+export class CardListComponent implements OnInit {
+  public cardsList: Cards[] = []; // Lista completa de cartões
+  public filteredCards: Cards[] = []; // Lista de cartões filtrados pelo usuário
   public noCardsTxt: string = 'Sem registros.';
 
   // Variáveis para a paginação
   public currentPage: number = 1;
-  public itemsPerPage: number = 5;  // Defina o número de itens por página
+  public itemsPerPage: number = 5; // Número de itens por página
   public totalPages: number = 1;
 
-  constructor(private readonly baseService: BaseService,
-              private readonly toastr: ToastrService) {}
+  constructor(
+    public readonly baseService: BaseService,
+    private readonly toastr: ToastrService
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadCards();
   }
 
-  loadCards(): void {
+  public loadCards(): void {
     this.baseService.getCardData().subscribe({
       next: (data: any) => {
-        this.cardsList = data;
-        this.totalPages = Math.ceil(this.cardsList.length / this.itemsPerPage);
+        this.cardsList = data; // Carrega todos os cartões
+        this.filteredCards = this.cardsList.filter(
+          (card) => card.user === this.baseService.user?.id
+        ); // Filtra os cartões pelo ID do usuário
+        this.totalPages = Math.ceil(this.filteredCards.length / this.itemsPerPage);
       },
       error: (error) => {
         console.error('Erro ao carregar os cartões:', error);
@@ -43,11 +49,10 @@ export class CardListComponent implements OnInit{
     });
   }
 
-  // Metodo para obter os cartões da página atual
   get paginatedCards(): Cards[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
     const end = start + this.itemsPerPage;
-    return this.cardsList.slice(start, end);
+    return this.filteredCards.slice(start, end); // Pagina os cartões já filtrados
   }
 
   // Funções para navegação entre páginas
@@ -70,6 +75,6 @@ export class CardListComponent implements OnInit{
 
   // Verifica se existem cartões para o usuário
   public hasCards(): boolean {
-    return this.cardsList.some(card => card.user === this.baseService.user?.id);
+    return this.filteredCards.length > 0;
   }
 }
