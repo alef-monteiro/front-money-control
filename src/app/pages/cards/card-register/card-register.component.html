@@ -1,28 +1,25 @@
-<div class="fixed inset-0 flex items-center justify-center
-bg-gray-900 bg-opacity-50 z-50"
+<div
+  class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
 >
-
-  <section class="flex bg-gray-200 flex-col items-center gap-5 w-1/4 min-w-[300px]
-bg-primary-black/80 backdrop-blur-md p-5 rounded-xl">
-
-    <p class="text-center font-bold text-xl">
+  <section
+    class="flex flex-col items-center gap-5 w-1/4 min-w-[300px]
+     bg-gray-400 p-5 rounded-xl shadow-lg"
+  >
+    <!-- Título -->
+    <p class="text-center font-bold text-xl text-gray-900">
       {{ titleRegisterTxt }}
     </p>
 
+    <!-- Formulário -->
     <form [formGroup]="registerCardForm" class="w-full">
       <app-primary-input
         formControlName="name"
         type="text"
-        label="Titulo"
-        placeholder="Titulo"
-        autofocus>
+        label="Título"
+        placeholder="Título"
+        autofocus
+      >
       </app-primary-input>
-
-      <!--      @if (registerCardForm.get('game_title').hasError('minlength')) {-->
-      <!--        <div class="text-start text-xs text-orange-salmon">-->
-      <!--          Mínimo de 3 caracteres.-->
-      <!--        </div>-->
-      <!--      }-->
 
       <app-primary-input
         formControlName="balance"
@@ -31,26 +28,29 @@ bg-primary-black/80 backdrop-blur-md p-5 rounded-xl">
         placeholder="R$5000"
       >
       </app-primary-input>
-
-      <!--      @if (registerCardForm.get('name').hasError('minlength')) {-->
-      <!--        <div class="text-start text-xs text-orange-salmon">-->
-      <!--          Mínimo de 10 caracteres.-->
-      <!--        </div>-->
-      <!--      }-->
     </form>
 
-    <div class=" flex flex-row items-center justify-around w-full">
+    <!-- Botões -->
+    <div class="flex flex-row items-center justify-around w-full">
       <button
         (click)="onSubmit()"
         type="button"
-        class="text-gray-800 bg-green-300 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        class="text-white bg-green-500 hover:bg-green-600 focus:outline-none
+        focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm
+        px-5 py-2.5 text-center mb-2"
+        aria-label="Salvar"
+      >
         {{ saveBtnTxt }}
       </button>
 
       <button
         (click)="toNavigate(['home'])"
         type="button"
-        class="text-gray-800 bg-green-300 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        class="text-white bg-red-500 hover:bg-red-600 focus:outline-none
+        focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm
+        px-5 py-2.5 text-center mb-2"
+        aria-label="Voltar para a Home"
+      >
         {{ backBtnTxt }}
       </button>
     </div>
