@@ -5,6 +5,8 @@ import {RegisterComponent} from './pages/register/register.component';
 import {HomeComponent} from './pages/home/home.component';
 import {CardsComponent} from './pages/cards/cards.component';
 import {ProfileComponent} from './pages/profile/profile.component';
+import {WalletComponent} from './pages/wallet/wallet.component';
+
 
 export const routes: Routes = [
   {
@@ -26,9 +28,18 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
-  }, {
+  },
+  {
     path: 'cards',
     component: CardsComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  },
+  {
+    path: 'wallet',
+    component: WalletComponent
   }, {
     path: 'profile',
     component: ProfileComponent

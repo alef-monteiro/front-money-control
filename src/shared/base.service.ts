@@ -91,7 +91,7 @@ export class BaseService {
   }
 
   public updateProfile(data: User) {
-    return this.httpClient.put(
+    return this.httpClient.patch(
       this.endPoints.endpoints.userUpdate(data.id),
       data,
       {headers: this.headers, withCredentials: true}
@@ -166,7 +166,6 @@ export class BaseService {
   }
 
 
-  // Metodo para obter o saldo total
   public getTotalBalance(): Observable<any> {
     return this.httpClient.get(
       this.endPoints.endpoints.totalBalance,
@@ -174,7 +173,6 @@ export class BaseService {
     );
   }
 
-  // Metodo para obter o resumo mensal
   public getMonthlySummary(): Observable<any> {
     return this.httpClient.get(
       this.endPoints.endpoints.monthlySummary,
@@ -182,7 +180,6 @@ export class BaseService {
     );
   }
 
-  // Metodo para obter as despesas do usuário
   public getUserExpenses(): Observable<any> {
     return this.httpClient.get(
       this.endPoints.endpoints.userTotalExpenses,
@@ -190,7 +187,6 @@ export class BaseService {
     );
   }
 
-  // Metodo para obter o extrato de um cartão por ID
   public getCardStatement(cardId: number): Observable<any> {
     return this.httpClient.get(
       this.endPoints.endpoints.cardStatementById(cardId),

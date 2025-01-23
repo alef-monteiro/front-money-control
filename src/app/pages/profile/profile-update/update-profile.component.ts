@@ -42,11 +42,8 @@ export class UpdateProfileComponent implements OnInit {
 
   public onSubmit() {
     if (this.updateForm.valid) {
-      // Recuperar a senha do sessionStorage
-      const password = sessionStorage.getItem('password');
-
       // Criar o payload com a senha
-      const payload = {...this.updateForm.value, password};
+      const payload = {...this.updateForm.value};
 
       this.baseService.updateProfile(payload).subscribe({
         next: () => {

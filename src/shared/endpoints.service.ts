@@ -20,12 +20,12 @@ export class EndpointsService {
     cardById: (id: number) => URLS.BASE + URLS.CARDS + id + '/',
 
     // Despesas
-    expensesData: URLS.BASE + URLS.CARDS + URLS.CARDS,
-    expensesById: (id: number) => URLS.BASE + URLS.CARDS + id + '/',
+    expensesData: URLS.BASE + URLS.EXPENSES,
+    expensesById: (id: number) => URLS.BASE + URLS.EXPENSES + id + '/',
 
     //Categorias  de Despesa
-    categoryData: URLS.BASE + URLS.CARDS + URLS.CARDS,
-    categoryById: (id: number) => URLS.BASE + URLS.CARDS + id + '/',
+    categoryData: URLS.BASE + URLS.CARDS + URLS.CATEGORIES,
+    categoryById: (id: number) => URLS.BASE + URLS.CATEGORIES + id + '/',
 
     //Dashboard ações
     dashboardData: URLS.BASE + URLS.DASHBOARD,
