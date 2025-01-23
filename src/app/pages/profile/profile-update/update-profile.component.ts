@@ -42,7 +42,6 @@ export class UpdateProfileComponent implements OnInit {
 
   public onSubmit() {
     if (this.updateForm.valid) {
-
       // Criar o payload com a senha
       const payload = {...this.updateForm.value};
 

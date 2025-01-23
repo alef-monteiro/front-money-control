@@ -7,6 +7,7 @@ import {CardsComponent} from './pages/cards/cards.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {WalletComponent} from './pages/wallet/wallet.component';
 
+
 export const routes: Routes = [
   {
     path: '', redirectTo: 'landing-page',
@@ -39,5 +40,8 @@ export const routes: Routes = [
   {
     path: 'wallet',
     component: WalletComponent
+  }, {
+    path: 'profile',
+    component: ProfileComponent
   }
 ];

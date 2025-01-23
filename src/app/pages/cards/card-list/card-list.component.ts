@@ -24,10 +24,12 @@ export class CardListComponent implements OnInit {
   public itemsPerPage: number = 5; // Número de itens por página
   public totalPages: number = 1;
 
+
   constructor(
     public readonly baseService: BaseService,
     private readonly toastr: ToastrService
   ) {}
+
 
   ngOnInit() {
     this.loadCards();
