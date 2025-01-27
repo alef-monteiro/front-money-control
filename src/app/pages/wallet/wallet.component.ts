@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {Expenses} from '../../../shared/models/expenses';
 import {BaseService} from '../../../shared/base.service';
 import {ToastrService} from 'ngx-toastr';
 import {DefaultHomeLayoutComponent} from '../../components/default-home-layout/default-home-layout.component';
+import {ExpensesRegisterComponent} from './expenses-register/expenses-register.component';
 
 @Component({
   selector: 'app-wallet',
@@ -11,20 +12,36 @@ import {DefaultHomeLayoutComponent} from '../../components/default-home-layout/d
     DecimalPipe,
     NgForOf,
     NgIf,
-    DefaultHomeLayoutComponent
+    DefaultHomeLayoutComponent,
+    ExpensesRegisterComponent
   ],
   templateUrl: './wallet.component.html',
   styleUrl: './wallet.component.scss'
 })
 export class WalletComponent implements OnInit {
+  @Input() closeWindow: boolean = false;
+
+  public addExpenseTxt = 'Novo';
   public expensesList: Expenses[] = []; // Lista completa de despesas
   public filteredExpenses: Expenses[] = []; // Lista filtrada para o usuário logado
-  public noExpensesTxt: string = 'Sem registros.';
 
+  public noExpensesTxt: string = 'Sem registros.';
   // Variáveis para paginação
   public currentPage: number = 1;
   public itemsPerPage: number = 5; // Número de itens por página
+
+
   public totalPages: number = 1;
+  public openWindow: boolean = false;
+
+  public onOpenWindow() {
+    this.openWindow = true;
+  }
+
+  public onCloseWindow() {
+    this.openWindow = false;
+    this.loadExpenses()
+  }
 
   constructor(
     public readonly baseService: BaseService,
@@ -52,16 +69,6 @@ export class WalletComponent implements OnInit {
     });
   }
 
-  // public getCardByID(id: number) {
-  //   if(this.expensesList.find((expense) => expense.card === id)){
-  //     console.log('Cartão Válido')
-  //     this.baseService.getCardDataById(id).subscribe({
-  //       next: (data: any) => {
-  //
-  //       }
-  //     })
-  //   }
-  // }
 
   get paginatedExpenses(): Expenses[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
@@ -93,5 +100,19 @@ export class WalletComponent implements OnInit {
     return this.filteredExpenses.length > 0;
   }
 
-
+  onDelete(id: number) {
+    if(confirm("Deseja deletar?")){
+      this.baseService.deleteExpense(id).subscribe({
+        next: () => {
+          this.toastr.success('Deletado com sucesso')
+          this.loadExpenses()
+        },
+        error:(err: any)=>{
+          console.log(err)
+          this.toastr.error('Erro ao deletar!')
+          this.loadExpenses()
+        }
+      })
+    }
+  }
 }
