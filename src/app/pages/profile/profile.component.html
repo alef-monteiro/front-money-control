@@ -1,0 +1,62 @@
+<app-default-home-layout>
+  <section class="w-full p-8 flex flex-col items-center">
+
+    @if (openWindow) {
+      <app-profile-update
+        (closeWindow)="onCloseWindow()">
+        >
+      </app-profile-update>
+    }
+
+    <!-- Header -->
+    <header class="text-center mb-6">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+        Informações do Usuário
+      </h1>
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        Confira os detalhes do seu perfil
+      </p>
+    </header>
+
+    <!-- User Details Section -->
+    <section class="w-full max-w-md bg-white
+    dark:bg-gray-800 shadow-md rounded-lg p-6">
+      <dl class="text-gray-900 divide-y mb-5 divide-gray-200 dark:text-white dark:divide-gray-700">
+        <!-- First Name -->
+        <div class="flex flex-col pb-4">
+          <dt class="text-sm text-gray-500 dark:text-gray-400">Primeiro Nome</dt>
+          <dd class="text-lg font-semibold">{{ this.baseService.user?.first_name }}</dd>
+        </div>
+
+        <!-- Last Name -->
+        <div class="flex flex-col py-4">
+          <dt class="text-sm text-gray-500 dark:text-gray-400">Último Nome</dt>
+          <dd class="text-lg font-semibold">{{ this.baseService.user?.last_name }}</dd>
+        </div>
+
+        <!-- Email -->
+        <div class="flex flex-col pt-4">
+          <dt class="text-sm text-gray-500 dark:text-gray-400">E-mail</dt>
+          <dd class="text-lg font-semibold">{{ this.baseService.user?.email }}</dd>
+        </div>
+      </dl>
+
+      <div class=" flex flex-row items-center justify-around w-full">
+        <button
+          (click)="onOpenWindow()"
+          type="button"
+          class="text-gray-800 bg-green-300 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+          {{ updateBtnTxt }}
+        </button>
+
+        <button
+          (click)="toNavigate(['home'])"
+          type="button"
+          class="text-gray-800 bg-green-300 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+          {{ backBtnTxt }}
+        </button>
+      </div>
+    </section>
+  </section>
+
+</app-default-home-layout>

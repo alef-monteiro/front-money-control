@@ -1,0 +1,26 @@
+<div class="container mx-auto p-4 h-screen">
+  <h2 class="text-xl font-semibold mb-4">Cartões Cadastrados</h2>
+
+  <!-- Lista de cartões -->
+  <div *ngIf="cardsList.length > 0" class="space-y-4">
+    <div *ngFor="let card of paginatedCards" class="border rounded-md p-4 hover:bg-gray-100">
+      @if (card.user === this.baseService.user?.id) {
+        <div class="flex items-center justify-between">
+          <div class="flex flex-col">
+            <h3 class="text-lg font-semibold">{{ card.name }}</h3>
+            <p class="text-sm text-gray-600">Saldo: R$ {{ card.balance | number: '1.2-2' }}</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="text-sm text-gray-400">Usuário: {{ this.baseService.user?.first_name }}</span>
+            <button *ngIf="hasCards()" class="text-primary-400 hover:text-primary-600">Editar</button>
+          </div>
+        </div>
+      } @else {
+        <div class="text-center text-gray-500">
+          <p>{{ noCardsTxt }}</p>
+        </div>
+      }
+    </div>
+  </div>
+
+</div>

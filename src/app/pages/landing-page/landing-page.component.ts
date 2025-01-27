@@ -15,7 +15,7 @@ export class LandingPageComponent {
   constructor(private router: Router) {
   }
 
-  public toNavigateTo(action: string[]) {
+  public toNavigate(action: string[]) {
     this.router.navigate(action).then()
   }
 }

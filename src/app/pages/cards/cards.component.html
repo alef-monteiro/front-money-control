@@ -1,0 +1,31 @@
+<app-default-home-layout>
+  <section class="container mx-auto px-4 py-8">
+
+    @if (openWindow) {
+      <app-card-register
+        (closeWindow)="onCloseWindow()">
+      >
+      </app-card-register>
+    }
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">
+      Cartões
+    </h1>
+
+    <section class="flex items-center w-full">
+      <button
+        (click)="onOpenWindow()"
+        type="button"
+        class="text-gray-800 bg-green-300 hover:bg-green-500
+        focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full
+        text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        {{ addCardTxt }}
+      </button>
+    </section>
+
+
+    <app-card-list>
+    </app-card-list>
+
+  </section>
+
+</app-default-home-layout>
