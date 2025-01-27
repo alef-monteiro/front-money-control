@@ -7,9 +7,7 @@ import {DefaultHomeLayoutComponent} from '../../components/default-home-layout/d
 @Component({
   selector: 'app-home',
   imports: [
-    DatePipe,
     CurrencyPipe,
-    NgForOf,
     DefaultHomeLayoutComponent
   ],
   templateUrl: './home.component.html',
@@ -18,7 +16,7 @@ import {DefaultHomeLayoutComponent} from '../../components/default-home-layout/d
 export class HomeComponent implements OnInit {
   totalBalance: number = 0;
   totalExpenses: number = 0;  // Total das despesas
-  monthlySummary: any[] = [];
+  // monthlySummary: any[] = [];
   realBalance: number = 0;  // Saldo real
 
   constructor(private dashboardService: BaseService) {}
@@ -26,7 +24,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadTotalBalance();
     this.loadUserExpenses(); // Carregar despesas
-    this.loadMonthlySummary();
+    // this.loadMonthlySummary();
   }
 
   // Carrega o saldo total
@@ -68,17 +66,17 @@ export class HomeComponent implements OnInit {
     this.realBalance = this.totalBalance - this.totalExpenses;
   }
 
-  // Carrega o resumo mensal
-  loadMonthlySummary(): void {
-    this.dashboardService.getMonthlySummary().subscribe({
-      next: (data) => {
-        this.monthlySummary = data;
-      },
-      error: (error) => {
-        console.error('Erro ao carregar resumo mensal:', error);
-      }
-    });
-  }
+  // // Carrega o resumo mensal
+  // loadMonthlySummary(): void {
+  //   this.dashboardService.getMonthlySummary().subscribe({
+  //     next: (data) => {
+  //       this.monthlySummary = data;
+  //     },
+  //     error: (error) => {
+  //       console.error('Erro ao carregar resumo mensal:', error);
+  //     }
+  //   });
+  // }
 }
 
 
