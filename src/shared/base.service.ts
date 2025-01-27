@@ -5,6 +5,7 @@ import {jwtDecode} from 'jwt-decode';
 import {EndpointsService} from './endpoints.service';
 import {User} from './models/user';
 import {Cards} from './models/cards';
+import {Expenses} from './models/expenses';
 
 interface LoginResponse {
   access: string;
@@ -98,9 +99,9 @@ export class BaseService {
     )
   }
 
-  public deleteProfile() {
+  public deleteProfile(id: number) {
     return this.httpClient.delete(
-      this.endPoints.endpoints.userProfile,
+      this.endPoints.endpoints.deleteUser(id),
       {headers: this.headers, withCredentials: true}
     )
   }
@@ -133,6 +134,21 @@ export class BaseService {
     )
   }
 
+  public deleteExpense(id:number){
+    return this.httpClient.delete(
+      this.endPoints.endpoints.expenseDelete(id),
+      {headers: this.headers, withCredentials: true}
+    )
+  }
+
+  public postExpense(data: Expenses){
+    return this.httpClient.post(
+      this.endPoints.endpoints.expensesData,
+      data,
+      {headers: this.headers, withCredentials: true}
+    )
+  }
+
   public getCardData() {
     return this.httpClient.get(
       this.endPoints.endpoints.cardsData,
@@ -144,6 +160,21 @@ export class BaseService {
     return this.httpClient.post(
       this.endPoints.endpoints.cardsData,
       data,
+      {headers: this.headers, withCredentials: true}
+    )
+  }
+
+  public updateCard(data: Cards){
+    return this.httpClient.patch(
+      this.endPoints.endpoints.cardUpdate(data.id),
+      data,
+      {headers: this.headers, withCredentials: true}
+    )
+  }
+
+  public deleteCard(id: number){
+    return this.httpClient.delete(
+      this.endPoints.endpoints.cardDelete(id),
       {headers: this.headers, withCredentials: true}
     )
   }

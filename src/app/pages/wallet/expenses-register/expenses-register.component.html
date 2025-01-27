@@ -1,0 +1,105 @@
+<div
+  class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
+>
+  <section
+    class="flex flex-col items-center gap-5 w-1/4 min-w-[300px]
+     bg-gray-400 p-5 rounded-xl shadow-lg"
+  >
+    <!-- Título -->
+    <p class="text-center font-bold text-xl text-gray-900">
+      {{ titleRegisterTxt }}
+    </p>
+    <!-- Formulário -->
+    <form [formGroup]="registerForm" class="w-full">
+      <div class="mb-4">
+        <label for="card"
+               class="block text-sm font-medium text-gray-700">
+          Cartões
+        </label>
+        <select
+          formControlName="card"
+          id="card"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          <option value="" disabled selected>Selecione cartão</option>
+          @for (card of cardsList; track card.id) {
+            @if (card.user === this.baseService.user?.id) {
+              <option [value]="card.id">{{ card.name }}</option>
+            }
+          }
+        </select>
+      </div>
+
+      <!-- Select para Categoria -->
+      <div class="mb-4">
+        <label for="category" class="block text-sm font-medium text-gray-700">Categoria</label>
+        <select
+          formControlName="category"
+          id="category"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          <option value="" disabled selected>Selecione uma categoria</option>
+          <option *ngFor="let option of categoryChoices" [value]="option[0]">{{ option[1] }}</option>
+        </select>
+      </div>
+
+      <!-- Select para Tipo de Pagamento -->
+      <div class="mb-4">
+        <label for="payment_type" class="block text-sm font-medium text-gray-700">Tipo de Pagamento</label>
+        <select
+          formControlName="payment_type"
+          id="payment_type"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        >
+          <option value="" disabled selected>Selecione o tipo de pagamento</option>
+          <option *ngFor="let option of paymentChoices" [value]="option[0]">{{ option[1] }}</option>
+        </select>
+      </div>
+
+      <app-primary-input
+        formControlName="description"
+        type="text"
+        label="Descrição"
+        placeholder="Descrição da despesa"
+      >
+      </app-primary-input>
+
+      <app-primary-input
+        formControlName="amount"
+        type="number"
+        label="Valor"
+        placeholder="R$0.00"
+      >
+      </app-primary-input>
+
+
+    </form>
+
+
+    <div class="flex flex-row items-center justify-around w-full">
+
+      <button
+        [disabled]="!registerForm.valid"
+        (click)="onSubmit()"
+        type="button"
+        class="text-white bg-green-500 hover:bg-green-600 focus:outline-none
+        focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm
+        px-5 py-2.5 text-center mb-2"
+        aria-label="Salvar"
+      >
+        {{ saveBtnTxt }}
+      </button>
+
+      <button
+        (click)="toNavigate(['home'])"
+        type="button"
+        class="text-white bg-red-500 hover:bg-red-600 focus:outline-none
+        focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm
+        px-5 py-2.5 text-center mb-2"
+        aria-label="Voltar para a Home"
+      >
+        {{ backBtnTxt }}
+      </button>
+    </div>
+  </section>
+</div>

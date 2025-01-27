@@ -24,10 +24,10 @@ export class CardRegisterComponent {
 
 
   constructor(
-    private formBuilderCard: FormBuilder,
-    private baseService: BaseService,
-    private toastr: ToastrService,
-    private router: Router,
+    private readonly formBuilderCard: FormBuilder,
+    private readonly baseService: BaseService,
+    private readonly toastr: ToastrService,
+    private readonly router: Router,
   ) {
     this.registerCardForm = this.formBuilderCard.group({
       user: this.baseService.user?.id,
@@ -57,7 +57,7 @@ export class CardRegisterComponent {
     }
   }
 
-  onSubmit() {
+ public onSubmit() {
     let cardData: Cards = this.registerCardForm.value;
     if(this.registerCardForm.valid) {
       this.baseService.postCardData(cardData).subscribe({
