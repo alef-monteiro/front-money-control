@@ -79,5 +79,4 @@ export class CardUpdateComponent implements OnInit {
       this.router.navigate(action).then()
     }
   }
-
 }

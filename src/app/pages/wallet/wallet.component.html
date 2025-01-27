@@ -1,7 +1,6 @@
 <app-default-home-layout >
   <section class="flex ">
   <div class="container mx-auto p-4 h-screen">
-
     @if (openWindow) {
       <app-expenses-register
         (closeWindow)="onCloseWindow()">
@@ -43,6 +42,7 @@
               <span class="text-sm text-gray-400">Cartão: {{ expenses.card }}</span>
               <span class="text-sm text-gray-400">Usuário: {{ this.baseService.user?.first_name }}</span>
               <button *ngIf="hasExpenses()" (click) = 'onDelete(expenses.id)' class="text-red-400 hover:text-red-600">Excluir</button>
+
             </div>
           </div>
         } @else {

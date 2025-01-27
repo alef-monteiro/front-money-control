@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {UpdateProfileComponent} from './profile-update/update-profile.component';
 import {ToastrService} from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-profile',
   imports: [

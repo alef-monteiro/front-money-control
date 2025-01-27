@@ -5,6 +5,7 @@ import {ToastrService} from 'ngx-toastr';
 import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {CardUpdateComponent} from '../card-update/card-update.component';
 
+
 @Component({
   selector: 'app-card-list',
   imports: [
@@ -33,14 +34,13 @@ export class CardListComponent implements OnInit {
   constructor(
     public readonly baseService: BaseService,
     private readonly toastr: ToastrService
-  ) {
-  }
+  ) {}
+
 
 
   ngOnInit() {
     this.loadCards();
   }
-
 
   public loadCards(): void {
     this.baseService.getCardData().subscribe({
@@ -64,7 +64,6 @@ export class CardListComponent implements OnInit {
       this.currentPage = this.totalPages;
     }
   }
-
 
   get paginatedCards(): Cards[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;

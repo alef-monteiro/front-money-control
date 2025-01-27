@@ -7,6 +7,7 @@ import {User} from './models/user';
 import {Cards} from './models/cards';
 import {Expenses} from './models/expenses';
 
+
 interface LoginResponse {
   access: string;
   refresh: string;
@@ -178,6 +179,7 @@ export class BaseService {
       {headers: this.headers, withCredentials: true}
     )
   }
+
 
   public getCardDataById(id: number) {
     return this.httpClient.get(

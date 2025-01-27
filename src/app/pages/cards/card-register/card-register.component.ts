@@ -24,10 +24,10 @@ export class CardRegisterComponent {
 
 
   constructor(
-    private readonly formBuilderCard: FormBuilder,
-    private readonly baseService: BaseService,
-    private readonly toastr: ToastrService,
-    private readonly router: Router,
+    private formBuilderCard: FormBuilder,
+    private baseService: BaseService,
+    private toastr: ToastrService,
+    private router: Router,
   ) {
     this.registerCardForm = this.formBuilderCard.group({
       user: this.baseService.user?.id,

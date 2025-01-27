@@ -16,6 +16,7 @@ export class EndpointsService {
     userUpdate: (id:number) => URLS.BASE + URLS.USERS + id + '/',
     deleteUser: (id:number) => URLS.BASE + URLS.USERS + id + '/',
 
+
     // Cartões
     cardsData: URLS.BASE + URLS.CARDS,
     cardById: (id: number) => URLS.BASE + URLS.CARDS + id + '/',

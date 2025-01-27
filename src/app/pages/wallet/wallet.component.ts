@@ -43,6 +43,7 @@ export class WalletComponent implements OnInit {
     this.loadExpenses()
   }
 
+
   constructor(
     public readonly baseService: BaseService,
     private readonly toastr: ToastrService
@@ -68,7 +69,6 @@ export class WalletComponent implements OnInit {
       },
     });
   }
-
 
   get paginatedExpenses(): Expenses[] {
     const start = (this.currentPage - 1) * this.itemsPerPage;
