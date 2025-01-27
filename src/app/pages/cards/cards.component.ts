@@ -1,4 +1,4 @@
-import {Component, Input, input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {DefaultHomeLayoutComponent} from "../../components/default-home-layout/default-home-layout.component";
 import {CardRegisterComponent} from './card-register/card-register.component';
 import {CardListComponent} from './card-list/card-list.component';
@@ -16,7 +16,7 @@ import {CardListComponent} from './card-list/card-list.component';
 export class CardsComponent {
   @Input() closeWindow: boolean = false;
   public openWindow: boolean = false;
-  public addCardTxt: string = 'Novo cartão';
+  public addCardTxt: string = 'Novo';
 
   public onOpenWindow() {
     this.openWindow = true;

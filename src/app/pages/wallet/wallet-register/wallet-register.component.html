@@ -1,0 +1,106 @@
+<div
+  class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50"
+>
+  <section
+    class="flex flex-col items-center gap-5 w-1/3 min-w-[300px]
+     bg-gray-400 p-5 rounded-xl shadow-lg"
+  >
+    <!-- Título -->
+    <p class="text-center font-bold text-xl text-gray-900">
+      {{ titleRegisterTxt }}
+    </p>
+
+    <form [formGroup]="registerForm" class="w-full">
+      <app-primary-input
+        formControlName="description"
+        type="text"
+        label="Descreva"
+        placeholder="'Compras de mercado'"
+        autofocus>
+      </app-primary-input>
+
+      <app-primary-input
+        formControlName="amount"
+        type="text"
+        label="Valor"
+        placeholder="R$5000,00"
+      >
+      </app-primary-input>
+
+      <div class="mb-5">
+        <label for="cards" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Cartões
+        </label>
+        <select id="cards" formControlName="card"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Cartão selecionado</option>
+
+          @for (card of cardsList; track card.id) {
+            @if (card.user === this.baseService.user?.id) {
+              <option [value]="card.id">{{ card.name }}</option>
+            }
+          }
+        </select>
+      </div>
+
+      <section class="flex justify-evenly">
+        <!-- Categorias -->
+        <div class="mb-5">
+          <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Categorias:
+          </label>
+          <select id="category" formControlName="category"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="" selected>Selecione uma categoria</option>
+            <option value="alimentação">Alimentação</option>
+            <option value="transporte">Transporte</option>
+            <option value="lazer">Lazer</option>
+            <option value="moradia">Moradia</option>
+            <option value="saúde">Saúde</option>
+          </select>
+        </div>
+
+        <!-- Formas de Pagamento -->
+        <div class="mb-5">
+          <label for="payment_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Forma de Pagamento:
+          </label>
+          <select id="payment_type" formControlName="payment_type"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option value="" selected>Selecione uma forma de pagamento</option>
+            <option value="credito">Crédito</option>
+            <option value="debito">Débito</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="pix">Pix</option>
+          </select>
+        </div>
+      </section>
+
+      <div class="flex flex-row items-center justify-around w-full">
+        <button
+          (click)="onSubmit()"
+          type="button"
+          class="text-white bg-green-500 hover:bg-green-600 focus:outline-none
+        focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm
+        px-5 py-2.5 text-center mb-2"
+          aria-label="Salvar"
+        >
+          {{ saveBtnTxt }}
+        </button>
+
+        <button
+          (click)="toNavigate(['home'])"
+          type="button"
+          class="text-white bg-red-500 hover:bg-red-600 focus:outline-none
+        focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm
+        px-5 py-2.5 text-center mb-2"
+          aria-label="Voltar para a Home"
+        >
+          {{ backBtnTxt }}
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

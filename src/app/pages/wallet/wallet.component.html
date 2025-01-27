@@ -1,48 +1,84 @@
-<app-default-home-layout >
+<app-default-home-layout>
   <section class="flex ">
-  <div class="container mx-auto p-4 h-screen">
-    <!-- Título da lista -->
-    <h2 class="text-xl font-semibold mb-4">Carteira</h2>
 
-    <!-- Mensagem quando não há cartões -->
-    <div *ngIf="expensesList.length === 0" class="text-center text-gray-500">
-      <p>{{ noExpensesTxt }}</p>
-    </div>
+    @if (openWindow) {
+      <app-wallet-register
+        (closeWindow)="onCloseWindow()">
+      </app-wallet-register>
+    }
 
-    <!-- Lista de cartões -->
-    <div *ngIf="expensesList.length > 0" class="space-y-4">
-      <div *ngFor="let expenses of paginatedExpenses" class="border rounded-md p-4 hover:bg-gray-100">
-        @if (expenses.user === this.baseService.user?.id) {
-          <div class="flex items-center justify-between">
-            <div class="flex flex-col">
-              <p>{{expenses.description}}</p>
-              <p class="text-sm text-red-600">R$ {{ expenses.amount | number: '1.2-2' }}</p>
-            </div>
-            <div class="flex items-center space-x-4">
-              <span class="text-sm text-gray-400">Cartão: {{ expenses.card }}</span>
-              <span class="text-sm text-gray-400">Usuário: {{ this.baseService.user?.first_name }}</span>
-              <button *ngIf="hasExpenses()" class="text-primary-400 hover:text-primary-600">Editar</button>
-            </div>
-          </div>
-        } @else {
-          <div class="text-center text-gray-500">
-            <p>{{ noExpensesTxt }}</p>
-          </div>
-        }
+    <div class="container mx-auto p-4 h-screen">
+      <h1 class="text-3xl font-bold text-gray-800 mb-6">
+        Carteira
+      </h1>
+
+      <section class="flex items-center w-full">
+        <button
+          (click)="onOpenWindow()"
+          type="button"
+          class="text-gray-800 bg-green-300 hover:bg-green-500
+        focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full
+        text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+          {{ addExpenseTxt }}
+        </button>
+      </section>
+
+      <!-- Mensagem quando não há cartões -->
+      @if (expensesList.length === 0) {
+        <div class="text-center text-gray-500">
+          <p>{{ noExpensesTxt }}</p>
+        </div>
+      }
+
+      <!-- Lista de cartões -->
+      @if (expensesList.length > 0) {
+        <div class="space-y-4">
+          @for (expenses of paginatedExpenses; track expenses.id) {
+            @if (expenses.user === this.baseService.user?.id) {
+              <div class="border rounded-md p-4 hover:bg-gray-100">
+                <div class="flex items-center justify-between">
+                  <div class="flex flex-col">
+                    <p>{{ expenses.description }}</p>
+                    <p class="text-sm text-red-600">R$ {{ expenses.amount | number: '1.2-2' }}</p>
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    @for (card of cardsList; track card.id){
+                      @if (card.id === expenses.card){
+                        <span class="text-sm text-gray-400">Cartão: {{card.name}}</span>
+                      }
+                    }
+                    @if (hasExpenses()) {
+                      <button
+                        (click)="onDelete(expenses.id)"
+                        class="text-red-400 hover:text-red-600">
+                        Exluir
+                      </button>
+                    }
+                  </div>
+                </div>
+              </div>
+            } @else {
+              <div class="text-center text-gray-500">
+                <p>{{ noExpensesTxt }}</p>
+              </div>
+            }
+          }
+        </div>
+      }
+
+      <!-- Controles de paginação -->
+      <div class="flex justify-between items-center mt-4">
+        <button (click)="previousPage()" [disabled]="currentPage === 1"
+                class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 disabled:bg-gray-200">
+          Anterior
+        </button>
+        <span class="text-sm text-gray-600">Página {{ currentPage }} de {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+                class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 disabled:bg-gray-200">
+          Próxima
+        </button>
       </div>
     </div>
 
-    <!-- Controles de paginação -->
-    <div class="flex justify-between items-center mt-4">
-      <button (click)="previousPage()" [disabled]="currentPage === 1" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 disabled:bg-gray-200">
-        Anterior
-      </button>
-      <span class="text-sm text-gray-600">Página {{ currentPage }} de {{ totalPages }}</span>
-      <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400 disabled:bg-gray-200">
-        Próxima
-      </button>
-    </div>
-  </div>
-
-</section>
+  </section>
 </app-default-home-layout>

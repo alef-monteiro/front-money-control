@@ -6,7 +6,6 @@ export interface Expenses extends ModelBase {
   category: string;
   description: string;
   amount: number;
-  payment_type: string;
   purchase_date: Date;
-  payment_choice: string;
+  payment_type: string;
 }

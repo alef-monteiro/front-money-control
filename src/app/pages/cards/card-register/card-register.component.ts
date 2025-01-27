@@ -24,10 +24,10 @@ export class CardRegisterComponent {
 
 
   constructor(
-    private formBuilderCard: FormBuilder,
-    private baseService: BaseService,
-    private toastr: ToastrService,
-    private router: Router,
+    private readonly formBuilderCard: FormBuilder,
+    private readonly baseService: BaseService,
+    private readonly toastr: ToastrService,
+    private readonly router: Router,
   ) {
     this.registerCardForm = this.formBuilderCard.group({
       user: this.baseService.user?.id,
@@ -52,18 +52,18 @@ export class CardRegisterComponent {
           }
         }
       )
-    }else{
+    } else {
       console.log('Formulário inválido.')
     }
   }
 
-  onSubmit() {
+ public onSubmit() {
     let cardData: Cards = this.registerCardForm.value;
-    if(this.registerCardForm.valid) {
+    if (this.registerCardForm.valid) {
       this.baseService.postCardData(cardData).subscribe({
         next: (data: any) => {
           console.log(data);
-          this.toastr.success(cardData.name,'Registrado com sucesso!');
+          this.toastr.success(cardData.name, 'Registrado com sucesso!');
           this.closeWindow.emit(true);
         },
         error: (error: any) => {
@@ -75,7 +75,7 @@ export class CardRegisterComponent {
   }
 
   public toNavigate(action: string[]) {
-    if(confirm('Deseja voltar?')){
+    if (confirm('Deseja voltar?')) {
       this.router.navigate(action).then()
     }
   }

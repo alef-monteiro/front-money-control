@@ -22,6 +22,7 @@ export class EndpointsService {
     // Despesas
     expensesData: URLS.BASE + URLS.EXPENSES,
     expensesById: (id: number) => URLS.BASE + URLS.EXPENSES + id + '/',
+    expensesDelete: (id: number) => URLS.BASE + URLS.EXPENSES + id + '/',
 
     //Categorias  de Despesa
     categoryData: URLS.BASE + URLS.CARDS + URLS.CATEGORIES,

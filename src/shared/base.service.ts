@@ -5,6 +5,7 @@ import {jwtDecode} from 'jwt-decode';
 import {EndpointsService} from './endpoints.service';
 import {User} from './models/user';
 import {Cards} from './models/cards';
+import {Expenses} from './models/expenses';
 
 interface LoginResponse {
   access: string;
@@ -129,6 +130,21 @@ export class BaseService {
   public getExpenseById(id: number) {
     return this.httpClient.get(
       this.endPoints.endpoints.expensesById(id),
+      {headers: this.headers, withCredentials: true}
+    )
+  }
+
+  public postExpense(data: Expenses) {
+    return this.httpClient.post(
+      this.endPoints.endpoints.expensesData,
+      data,
+      {headers: this.headers, withCredentials: true}
+    )
+  }
+
+  public deleteExpense(id: number) {
+    return this.httpClient.delete(
+      this.endPoints.endpoints.expensesDelete(id),
       {headers: this.headers, withCredentials: true}
     )
   }
