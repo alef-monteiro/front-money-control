@@ -33,6 +33,7 @@
     <!-- Botões -->
     <div class="flex flex-row items-center justify-around w-full">
       <button
+        [disabled]="!registerCardForm.valid"
         (click)="onSubmit()"
         type="button"
         class="text-white bg-green-500 hover:bg-green-600 focus:outline-none

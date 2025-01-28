@@ -1,23 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Cards} from '../../../../shared/models/cards';
 import {BaseService} from '../../../../shared/base.service';
 import {ToastrService} from 'ngx-toastr';
 import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
+import {CardUpdateComponent} from '../card-update/card-update.component';
+
 
 @Component({
   selector: 'app-card-list',
   imports: [
     NgIf,
     NgForOf,
-    DecimalPipe
+    DecimalPipe,
+    CardUpdateComponent
   ],
   templateUrl: './card-list.component.html',
   styleUrl: './card-list.component.scss'
 })
 export class CardListComponent implements OnInit {
+  @Input('cardID') cardId: number = 0;
+
   public cardsList: Cards[] = []; // Lista completa de cartões
   public filteredCards: Cards[] = []; // Lista de cartões filtrados pelo usuário
   public noCardsTxt: string = 'Sem registros.';
+  public openWindow: boolean = false;
 
   // Variáveis para a paginação
   public currentPage: number = 1;
@@ -31,6 +37,7 @@ export class CardListComponent implements OnInit {
   ) {}
 
 
+
   ngOnInit() {
     this.loadCards();
   }
@@ -38,17 +45,24 @@ export class CardListComponent implements OnInit {
   public loadCards(): void {
     this.baseService.getCardData().subscribe({
       next: (data: any) => {
-        this.cardsList = data; // Carrega todos os cartões
+        this.cardsList = data;
         this.filteredCards = this.cardsList.filter(
           (card) => card.user === this.baseService.user?.id
-        ); // Filtra os cartões pelo ID do usuário
-        this.totalPages = Math.ceil(this.filteredCards.length / this.itemsPerPage);
+        );
+        this.recalculatePagination(); // Atualiza as páginas dinamicamente
       },
       error: (error) => {
         console.error('Erro ao carregar os cartões:', error);
         this.toastr.error('Erro ao carregar os cartões. Tente novamente.');
       },
     });
+  }
+
+  private recalculatePagination(): void {
+    this.totalPages = Math.ceil(this.filteredCards.length / this.itemsPerPage);
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = this.totalPages;
+    }
   }
 
   get paginatedCards(): Cards[] {
@@ -78,5 +92,31 @@ export class CardListComponent implements OnInit {
   // Verifica se existem cartões para o usuário
   public hasCards(): boolean {
     return this.filteredCards.length > 0;
+  }
+
+  public onOpenWindow(id: number) {
+    this.openWindow = true;
+    this.cardId = id;
+  }
+
+  public onCloseWindow(): void {
+    this.openWindow = false;
+    this.loadCards(); // Atualiza a lista de cartões após fechar a janela
+  }
+
+  onDelete(id: number) {
+    if (confirm('Deseja deletar?')) {
+      this.baseService.deleteCard(id).subscribe({
+        next: (data: any) => {
+          this.toastr.success('Deletado com sucesso!')
+          this.loadCards()
+        },
+        error: (data: any) => {
+          console.log(data)
+          this.toastr.error('Erro ao deletar!')
+          this.loadCards()
+        }
+      })
+    }
   }
 }

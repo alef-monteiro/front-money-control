@@ -57,7 +57,7 @@ export class CardRegisterComponent {
     }
   }
 
-  onSubmit() {
+ public onSubmit() {
     let cardData: Cards = this.registerCardForm.value;
     if(this.registerCardForm.valid) {
       this.baseService.postCardData(cardData).subscribe({

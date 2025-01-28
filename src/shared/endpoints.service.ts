@@ -14,14 +14,20 @@ export class EndpointsService {
     userProfile: URLS.BASE + URLS.USERS,
     userProfileById: (id: number) => URLS.BASE + URLS.USERS + id + '/',
     userUpdate: (id:number) => URLS.BASE + URLS.USERS + id + '/',
+    deleteUser: (id:number) => URLS.BASE + URLS.USERS + id + '/',
+
 
     // Cartões
     cardsData: URLS.BASE + URLS.CARDS,
     cardById: (id: number) => URLS.BASE + URLS.CARDS + id + '/',
+    cardUpdate: (id: number) => URLS.BASE + URLS.CARDS + id + '/',
+    cardDelete: (id: number) => URLS.BASE + URLS.CARDS + id + '/',
 
     // Despesas
     expensesData: URLS.BASE + URLS.EXPENSES,
     expensesById: (id: number) => URLS.BASE + URLS.EXPENSES + id + '/',
+    expenseDelete: (id: number) => URLS.BASE + URLS.EXPENSES + id + '/',
+    expenseUpdate: (id: number) => URLS.BASE + URLS.EXPENSES + id + '/',
 
     //Categorias  de Despesa
     categoryData: URLS.BASE + URLS.CARDS + URLS.CATEGORIES,
